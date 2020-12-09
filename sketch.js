@@ -15,7 +15,7 @@ function preload() {
 function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
-    world = engine.world;
+    world = engine.world; 
 
 
     ground = new Ground(600,height,1200,20);
@@ -38,8 +38,8 @@ function setup(){
 
     bird = new Bird(100,100);
 
-    log6 = new Log(230,180,80, PI/2);
-    chain = new Chain(bird.body,log6.body);
+   
+    slingShot = new  Slingshot(bird.body,{x:200,y:100});
 }
 
 function draw(){
@@ -63,6 +63,17 @@ function draw(){
 
     bird.display();
     platform.display();
-    log6.display();
-    chain.display();    
+
+    
+    slingShot.display();    
+}
+
+function mouseDragged() {
+
+    Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY})
+
+}
+
+function mouseReleased(){
+    slingShot.fly();
 }
